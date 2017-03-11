@@ -1,0 +1,79 @@
+{
+  "name": "__MSG_appName__",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "bookmarks",
+    "clipboardRead",
+    "clipboardWrite",
+    "contentSettings",
+    "cookies",
+    "*://*.google.com/",
+    "debugger",
+    "history",
+    "idle",
+    "management",
+    "notifications",
+    "pageCapture",
+    "topSites",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.booking.com/hotel/*",
+        "https://www.booking.com/hotel/*",
+        "http://www.booking.com/searchresults.html?*",
+        "https://www.booking.com/searchresults.html?*",
+        "https://secure.booking.com/book.html?*"
+      ],
+      "js": [
+        "scripts/jquery.3.1.1.min.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "run_at": "document_end",
+
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/package.svg"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Booking.com Meetdeal",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/icon-48.png"
+  ]
+}
