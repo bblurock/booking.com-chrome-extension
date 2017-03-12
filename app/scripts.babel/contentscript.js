@@ -216,8 +216,23 @@ jQuery.noConflict();
       <h1 class="more-deal-title">
         All Packages in ${ $('#hp_hotel_name').text() }
         <a class="be-merchant">
-          ${renderPowerPackLogo(COLOR_BLUE, 18)}
-          Become Our Merchant
+          <div class="d-deal d-deal__cursor d-deal__lonely d-deal__main d-deal__tooltip d-deal__today_copy" data-component="track" data-track="click" data-hash="YPNBJOTXNAWXAQNSMTWGO" data-custom-goal="1">
+            <div class="d-deal-best d-deal-best-more-deal">
+              <span class="d-deal--main  d-deal--main__text">
+                ${renderPowerPackLogo(COLOR_BLUE, 18)} Become Our Merchant
+              </span>
+            </div>
+            <div class="d-deal-w">
+              <div class="d-deal-w--section d-deal-w--smart">
+                <span class="d-deal-w--icon">
+                  ${renderPowerPackLogo(COLOR_PINK, 35)}
+                </span>
+                <span>
+                  Become our merchant to promote your business with us
+                </span>
+              </div>
+            </div>
+          </div>
         </a>
       </h1>
       <img class="more-deal-images" src="${chrome.extension.getURL('images/our-suggestion.jpg')}" />
@@ -266,8 +281,6 @@ jQuery.noConflict();
           const thumbnail = $(this).data('thumbnail');
           const name = $(this).data('name');
 
-          $('.deal-wrapper').remove();
-
           // Toggle itself
           $(this).hasClass(classActive) ? $(this).removeClass(classActive) : $(this).addClass(classActive) ;
 
@@ -279,10 +292,14 @@ jQuery.noConflict();
             <em>${numSeleciton}</em> Packages Selected
           `);
 
+          if ($('#booking-summary .package-selected')) {
+            $('#booking-summary .package-selected').html(`${numSeleciton} package Selected <br />+ <br />`);
+          }
+
+          // $('.deal-wrapper').remove();
+          //
           // if (shouldToggleOn) {
-
           //   $(this).addClass(classActive);
-
           //   // Init Custom Deal highetWrapper
           //   $('.property_hightlights_wrapper').append(
           //     renderHighlightWrapper({

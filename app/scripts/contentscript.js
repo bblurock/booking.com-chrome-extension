@@ -85,7 +85,7 @@ jQuery.noConflict();
     $('#booking-summary').prepend('\n        <span class="package-selected"></span>\n    ');
 
     // Init Side Bar Fade-in modal, steal from review
-    $('.' + reviewListOverlayClass).html('\n      <img class="more-deal-images verified" src="' + chrome.extension.getURL('images/verified-account.jpg') + '" />\n      <h1 class="more-deal-title">\n        All Packages in ' + $('#hp_hotel_name').text() + '\n        <a class="be-merchant">\n          ' + renderPowerPackLogo(COLOR_BLUE, 18) + '\n          Become Our Merchant\n        </a>\n      </h1>\n      <img class="more-deal-images" src="' + chrome.extension.getURL('images/our-suggestion.jpg') + '" />\n      <img class="more-deal-images" src="' + chrome.extension.getURL('images/filter-deals.jpg') + '" />\n      <img class="more-deal-images" src="' + chrome.extension.getURL('images/more-deals.jpg') + '" />\n    ');
+    $('.' + reviewListOverlayClass).html('\n      <img class="more-deal-images verified" src="' + chrome.extension.getURL('images/verified-account.jpg') + '" />\n      <h1 class="more-deal-title">\n        All Packages in ' + $('#hp_hotel_name').text() + '\n        <a class="be-merchant">\n          <div class="d-deal d-deal__cursor d-deal__lonely d-deal__main d-deal__tooltip d-deal__today_copy" data-component="track" data-track="click" data-hash="YPNBJOTXNAWXAQNSMTWGO" data-custom-goal="1">\n            <div class="d-deal-best d-deal-best-more-deal">\n              <span class="d-deal--main  d-deal--main__text">\n                ' + renderPowerPackLogo(COLOR_BLUE, 18) + ' Become Our Merchant\n              </span>\n            </div>\n            <div class="d-deal-w">\n              <div class="d-deal-w--section d-deal-w--smart">\n                <span class="d-deal-w--icon">\n                  ' + renderPowerPackLogo(COLOR_PINK, 35) + '\n                </span>\n                <span>\n                  Become our merchant to promote your business with us\n                </span>\n              </div>\n            </div>\n          </div>\n        </a>\n      </h1>\n      <img class="more-deal-images" src="' + chrome.extension.getURL('images/our-suggestion.jpg') + '" />\n      <img class="more-deal-images" src="' + chrome.extension.getURL('images/filter-deals.jpg') + '" />\n      <img class="more-deal-images" src="' + chrome.extension.getURL('images/more-deals.jpg') + '" />\n    ');
 
     // Hack the title - Add powerpack Badge
     $('.nowrap.hp__hotel_ratings').append(renderInsertBadge('PowerPack Available!'));
@@ -119,8 +119,6 @@ jQuery.noConflict();
           var thumbnail = $(_this).data('thumbnail');
           var name = $(_this).data('name');
 
-          $('.deal-wrapper').remove();
-
           // Toggle itself
           $(_this).hasClass(classActive) ? $(_this).removeClass(classActive) : $(_this).addClass(classActive);
 
@@ -129,10 +127,14 @@ jQuery.noConflict();
 
           $('.number-packages-selected').html('\n            ' + renderPowerPackLogo(COLOR_BLUE, 14) + ':\n            <em>' + numSeleciton + '</em> Packages Selected\n          ');
 
+          if ($('#booking-summary .package-selected')) {
+            $('#booking-summary .package-selected').html(numSeleciton + ' package Selected <br />+ <br />');
+          }
+
+          // $('.deal-wrapper').remove();
+          //
           // if (shouldToggleOn) {
-
           //   $(this).addClass(classActive);
-
           //   // Init Custom Deal highetWrapper
           //   $('.property_hightlights_wrapper').append(
           //     renderHighlightWrapper({

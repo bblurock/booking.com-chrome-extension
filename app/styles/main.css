@@ -259,3 +259,12 @@ body {
 .number-packages-selected em {
   font-weight: 700;
 }
+
+.d-deal-best-more-deal {
+  background: #ffffff!important;
+}
+
+.d-deal-best-more-deal .d-deal--main {
+  font-weight: 700!important;
+  color: #022b80!important;
+}
