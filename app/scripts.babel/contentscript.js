@@ -65,6 +65,22 @@ const renderFakeCard = (index) => {
     `;
   }
 
+  const toggleFullDealButton = (customClass, sentence) => (`
+    <a class="${customClass} big_review_score_detailed js-big_review_score_detailed ind_rev_total hp_review_score js-hotel-review-score" href="#blockdisplay4" rel="reviews" data-tab-link="" onclick="return false;" style="">
+      <span class="js--hp-scorecard-scoreword" data-open-map-track="rev">
+        ${sentence}
+      </span>
+    </a>`)
+
+  const renderFullDeals = rel => (`
+    <div id="blockdisplay5" class="review_list_block one_col review_list_block-sliding_in review_list_block-sliding_in-shown" data-tab="${rel}" style="">
+      <div class="review_list_block-sliding_in_wrapper" data-component="track" data-track="view" data-stage="1" data-hash="adUINVNNLfXdBGHQIcbFDeJZVKMO">
+        hi
+      </div>
+      <div class="reviews_panel-close_button"><i class="bicon-aclose"></i></div>
+    </div>
+  `)
+
   /***************************
    *
    *  For Hotel Detail Page *
@@ -78,6 +94,9 @@ const renderFakeCard = (index) => {
     const $availabilityElem = $('#hp_availability_style_changes');
     const hotelId = $('*[data-hotel-id]').data('hotel-id');
     const cardArray = [];
+    const reviewListOverlayClass = 'review_list_block-sliding_in_wrapper'
+    const FULL_DEAL_REL = 'review';
+    $(`.${reviewListOverlayClass}`).html('');
 
     /**
      * Append banner flag
@@ -109,15 +128,16 @@ const renderFakeCard = (index) => {
        * Prepend Pre-selected packages
        */
       $availabilityElem.prepend(`
-        <h2 class="bolder-headers package">Our Special Packages: <a href="#" class="package-showall">Click here to show all packages</a></h2>
+        <h2 class="bolder-headers package">Our Special Packages: ${toggleFullDealButton('package-showall', 'Click here to show all packages')}</h2>
         <div class="card-in-row">
           ${cardArray.join('')}
           <div class="more-package">
-            <p>More Packages <small>▶</samll></p>
+            ${toggleFullDealButton('more-package-link', 'More Packages <small>▶</samll>')}
           </div>
         </div>
       `);
 
+      // Toggling Deal Selection
       $('.packageCaptionCard').each(function () {
         $(this).click(() => {
           const classActive = 'active'
@@ -208,7 +228,4 @@ const renderFakeCard = (index) => {
       })
     });
   }
-
-
 })(jQuery);
-
