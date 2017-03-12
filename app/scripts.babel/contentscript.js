@@ -22,7 +22,7 @@ const renderFakeCard = (index) => {
         <p class="package-numbers">Selected by 12,345 orders</p>
         <div class="package-price">
           <p class="package-original">Original price from TW 600</p>
-          <h4 class="package-now"><small>now is</small> FREE</h4>
+          <h4 class="package-now"><small>now is</small>TWD FREE</h4>
         </div>
       </div>
     </div>
@@ -36,10 +36,19 @@ const renderFakeCard = (index) => {
     discounted_price: discountPrice,
     original_price: originalPrice,
     image_thumbnail_url: thumbnail,
+    short_name,
     name,
   }) => {
     return `
-      <div class="packageCaptionCard" data-deal-card-item="${id}">
+      <div
+        class="packageCaptionCard"
+        data-deal-card-item="${id}"
+        data-description="${description}"
+        data-discountPrice="${discountPrice}"
+        data-originalPrice="${originalPrice}"
+        data-thumbnail="${thumbnail}"
+        data-name="${short_name} ${name}"
+      >
         <div
           class="package-left"
           style='
@@ -53,12 +62,12 @@ const renderFakeCard = (index) => {
         />
         <div class="package-right">
           <i class="bicon-checkmark-circle"></i>
-          <h3 class="package-title">${name}</h3>
+          <h3 class="package-title">${short_name} ${name}</h3>
           <p class="package-description">${description || 'No Description Yet'}</p>
           <p class="package-numbers">Selected by 12,345 orders</p>
           <div class="package-price">
             <p class="package-original">Original price from TWD ${parseInt(originalPrice).toFixed()}</p>
-            <h4 class="package-now"><small>now is</small> ${parseInt(discountPrice).toFixed()}</h4>
+            <h4 class="package-now"><small>now is</small> TWD ${parseInt(discountPrice).toFixed()}</h4>
           </div>
         </div>
       </div>
@@ -72,12 +81,42 @@ const renderFakeCard = (index) => {
       </span>
     </a>`)
 
-  const renderFullDeals = rel => (`
-    <div id="blockdisplay5" class="review_list_block one_col review_list_block-sliding_in review_list_block-sliding_in-shown" data-tab="${rel}" style="">
-      <div class="review_list_block-sliding_in_wrapper" data-component="track" data-track="view" data-stage="1" data-hash="adUINVNNLfXdBGHQIcbFDeJZVKMO">
-        hi
+  const renderHighlightWrapper = ({
+    description,
+    thumbnail,
+    name,
+  }) => (`
+    <div class="deal-wrapper">
+      <div class="property-highlights section-border">
+        <div data-et-view="ZCFRURURYXYIHMaQZdDSBXe:3"></div>
+        <div data-et-view="ZCFRURURYXYIHMaQZdDSBXe:4"></div>
+        <h3 class="ph-header">
+          <svg fill="#003580" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+          </svg>
+          &nbsp; Your Package ${toggleFullDealButton('ph-header__edit', 'Edit')}
+        </h3>
+        <div class="ph-section">
+          <div
+            class="package-left"
+            style='
+              width: 80px;
+              height: 80px;
+              background-color: #efefef;
+              background: #efefef url(${thumbnail}) center center / cover;
+              flex-shrink: 0;
+              margin-right: 12px;
+            '
+          />
+          <div class="deal-wrapper__descContainer">
+            <h3>${name}</h3>
+            <span class="ph-item-copy-heart"><script type="track_copy" data-hash="ZOOTIPPQFFdGdfUSCaIaeaGVKe"></script>
+              ${description || 'Allows unlimited journeys on the Edinburg on the day of purchase.'}
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="reviews_panel-close_button"><i class="bicon-aclose"></i></div>
     </div>
   `)
 
@@ -95,21 +134,17 @@ const renderFakeCard = (index) => {
     const hotelId = $('*[data-hotel-id]').data('hotel-id');
     const cardArray = [];
     const reviewListOverlayClass = 'review_list_block-sliding_in_wrapper'
-    const FULL_DEAL_REL = 'review';
-    $(`.${reviewListOverlayClass}`).html('');
 
-    /**
-     * Append banner flag
-     */
-
-    // const $gallery = $('.hp-gallery-slides');
-    // const bannerClass = 'gallery-mealplan--container gallery-mealplan--container-carousel js-fly-content-tooltip js-ribbon-discount gallery-best-deal';
-    // const bannerPhrease = 'Bonus Package Deal';
-
-    // $gallery.parent().append(`
-    //   <div class="${bannerClass}">
-    //     <p class="gallery-mealplan--p">${bannerPhrease}</p>
-    //   </div>`);
+    // Init Side Bar Fade-in modal, steal from review
+    $(`.${reviewListOverlayClass}`).html(`
+      <h1 class="more-deal-title">
+        All Packages in ${ $('#hp_hotel_name').text() }
+        <a class="be-merchant">Become Our Merchant</a>
+      </h1>
+      <img class="more-deal-images" src="${chrome.extension.getURL('images/our-suggestion.jpg')}" />
+      <img class="more-deal-images" src="${chrome.extension.getURL('images/filter-deals.jpg')}" />
+      <img class="more-deal-images" src="${chrome.extension.getURL('images/more-deals.jpg')}" />
+    `);
 
     /**
      * Fetching Best Deal Service
@@ -122,7 +157,7 @@ const renderFakeCard = (index) => {
         cardArray.push(renderCard(hotelId, hotel));
       })
 
-      cardArray.push([1, 2].map((item, index) => renderFakeCard(index)).join(''));
+      // cardArray.push([1, 2].map((item, index) => renderFakeCard(index)).join(''));
 
       /**
        * Prepend Pre-selected packages
@@ -142,8 +177,24 @@ const renderFakeCard = (index) => {
         $(this).click(() => {
           const classActive = 'active'
           const shouldToggleOn = !$(this).hasClass(classActive);
+          const description = $(this).data('description');
+          const thumbnail = $(this).data('thumbnail');
+          const name = $(this).data('name');
+
           $('.packageCaptionCard').removeClass(classActive);
-          if (shouldToggleOn) $(this).addClass(classActive);
+          $('.deal-wrapper').remove();
+
+          if (shouldToggleOn) {
+            $(this).addClass(classActive);
+
+            // Init Custom Deal highetWrapper
+            $('.property_hightlights_wrapper').append(
+              renderHighlightWrapper({
+                description,
+                thumbnail,
+                name,
+              }));
+          }
         });
       });
     })

@@ -152,6 +152,53 @@ body {
 	color: #ff4165;
 }
 
+.more-deal-images {
+  max-width: 600px;
+  margin-bottom: 0.75rem;
+}
+
+.more-deal-title {
+  margin-bottom: 0.75rem;
+}
+
+.review_list_block-sliding_in_wrapper {
+  overflow: scroll;
+}
+
+.be-merchant {
+  cursor: pointer;
+  font-size: 14px;
+  float: right;
+  margin-top: 6px;
+}
+
+.deal-wrapper {
+  margin: 0.5rem 0;
+}
+
+.deal-wrapper .ph-header {
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+}
+
+.deal-wrapper .ph-section {
+  display: flex;
+}
+
+.ph-header__edit {
+  font-size: 12px!important;
+  display: flex;
+  justify-content: flex-end;
+  flex: 10;
+  text-decoration: none;
+}
+
+.deal-wrapper__descContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 /***************************
  *
  *  For Search Result Page
