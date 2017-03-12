@@ -2,35 +2,34 @@
 
 jQuery.noConflict();
 
-const renderFakeCard = (index) => {
-  return `
-    <div class="packageCaptionCard" data-deal-card-item="${index}">
-      <div
-        class="package-left"
-        style='
-          width: 112px;
-          height: 112px;
-          background-color: #efefef;
-          flex-shrink: 0;
-          margin-right: 12px;
-        '
-      />
-      <div class="package-right">
-        <i class="bicon-checkmark-circle"></i>
-        <h3 class="package-title">Golden State Museum for FREE</h3>
-        <p class="package-description">Allows unlimited journeys on the Edinburg on the day of purchase.</p>
-        <p class="package-numbers">Selected by 12,345 orders</p>
-        <div class="package-price">
-          <p class="package-original">Original price from TW 600</p>
-          <h4 class="package-now"><small>now is</small>TWD FREE</h4>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
 (function($) {
   const ROOT_API_URL = 'http://bytheway-rails.herokuapp.com/hotel_packages';
+  const renderFakeCard = (index) => {
+    return `
+      <div class="packageCaptionCard" data-deal-card-item="${index}">
+        <div
+          class="package-left"
+          style='
+            width: 112px;
+            height: 112px;
+            background-color: #efefef;
+            flex-shrink: 0;
+            margin-right: 12px;
+          '
+        />
+        <div class="package-right">
+          <i class="bicon-checkmark-circle"></i>
+          <h3 class="package-title">Golden State Museum for FREE</h3>
+          <p class="package-description">Allows unlimited journeys on the Edinburg on the day of purchase.</p>
+          <p class="package-numbers">Selected by 12,345 orders</p>
+          <div class="package-price">
+            <p class="package-original">Original price from TW 600</p>
+            <h4 class="package-now"><small>now is</small>TWD FREE</h4>
+          </div>
+        </div>
+      </div>
+    `;
+  }
   const renderCard = (id, {
     description,
     discounted_price: discountPrice,
@@ -74,7 +73,7 @@ const renderFakeCard = (index) => {
     `;
   }
 
-  const toggleFullDealButton = (customClass, sentence) => (`
+  const renderToggleFullDealButton = (customClass, sentence) => (`
     <a class="${customClass} big_review_score_detailed js-big_review_score_detailed ind_rev_total hp_review_score js-hotel-review-score" href="#blockdisplay4" rel="reviews" data-tab-link="" onclick="return false;" style="">
       <span class="js--hp-scorecard-scoreword" data-open-map-track="rev">
         ${sentence}
@@ -95,7 +94,7 @@ const renderFakeCard = (index) => {
             <path d="M0 0h24v24H0z" fill="none"/>
             <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
           </svg>
-          &nbsp; Your Package ${toggleFullDealButton('ph-header__edit', 'Edit')}
+          &nbsp; Your Package ${renderToggleFullDealButton('ph-header__edit', 'Edit')}
         </h3>
         <div class="ph-section">
           <div
@@ -120,12 +119,74 @@ const renderFakeCard = (index) => {
     </div>
   `)
 
+  const renderInsertBadge = shortName => (`
+    <div class="best-deal-container">
+      <div class="d-deal d-deal__cursor d-deal__lonely d-deal__main d-deal__tooltip d-deal__today_copy" data-component="track" data-track="click" data-hash="YPNBJOTXNAWXAQNSMTWGO" data-custom-goal="1">
+        <div class="d-deal-best">
+          <span class="d-deal--main  d-deal--main__text">
+            ${shortName}
+          </span>
+          <span class="d-deal--ext d-deal--smart d-deal--ext__last d-deal--ext__first ">
+            <svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/>
+            </svg>
+          </span>
+          </div>
+          <div class="d-deal-w">
+            <div class="d-deal-w--section d-deal-w--smart">
+              <span class="d-deal-w--icon">
+                <svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/>
+                </svg>
+              </span>
+              <span>
+                Great package here for you during your travel.
+              </span>
+            </div>
+          </div>
+      </div>
+    </div>`);
+
+
   /***************************
    *
    *  For Hotel Detail Page *
    *
    ***************************/
   const currentUrl = window.location.href;
+
+  if (currentUrl.indexOf('https://secure.booking.com/book.html') === 0) {
+    const powerPackPrice = 400;
+    const $totalPrice = $('.bp_pricedetails_total_value');
+    const $hotelNameTitle = $('.bp_hotel_name_title');
+
+    // Hack the price - append detail
+    $('.bp_pricedetails_breakdown').append(`
+      <li class="bp_pricedetails_breakdown_included">
+        <span class="bp_pricedetails_breakdown_charge">
+          Taipei 101 Observatory Ticket Adult Ticket
+        </span>
+        <span class="bp_pricedetails_breakdown_price">
+          TWD&nbsp;${powerPackPrice}
+        </span>
+      </li>
+    `)
+
+    // Hack the price - total price
+    $totalPrice.text(`TWD ${$totalPrice.data('price') + powerPackPrice}`);
+
+    // Hack the title - Add badge
+    $hotelNameTitle.after(renderInsertBadge('Taipei 101 Observatory Ticket Adult Ticket'));
+  }
+
+
+  /***************************
+   *
+   *  For Hotel Detail Page *
+   *
+   ***************************/
   if (
     currentUrl.indexOf('http://www.booking.com/hotel') === 0 ||
     currentUrl.indexOf('https://www.booking.com/hotel') === 0
@@ -146,6 +207,9 @@ const renderFakeCard = (index) => {
       <img class="more-deal-images" src="${chrome.extension.getURL('images/more-deals.jpg')}" />
     `);
 
+    // Hack the title - Add powerpack Badge
+    $('#wrap-hotelpage-top').before(renderInsertBadge('PowerPack Available!'));
+
     /**
      * Fetching Best Deal Service
      */
@@ -163,11 +227,11 @@ const renderFakeCard = (index) => {
        * Prepend Pre-selected packages
        */
       $availabilityElem.prepend(`
-        <h2 class="bolder-headers package">Our Special Packages: ${toggleFullDealButton('package-showall', 'Click here to show all packages')}</h2>
+        <h2 class="bolder-headers package">Our Special Packages: ${renderToggleFullDealButton('package-showall', 'Click here to show all packages')}</h2>
         <div class="card-in-row">
           ${cardArray.join('')}
           <div class="more-package">
-            ${toggleFullDealButton('more-package-link', 'More Packages <small>▶</samll>')}
+            ${renderToggleFullDealButton('more-package-link', 'More Packages <small>▶</samll>')}
           </div>
         </div>
       `);
@@ -233,45 +297,16 @@ const renderFakeCard = (index) => {
 
 
       Object.keys(data).forEach((hotelId) => {
-        const { name: bestDeal } = data[hotelId];
-        if (!bestDeal) return;
+        const { name: bestDeal, short_name: shortName } = data[hotelId];
+        if (!shortName) return;
 
         const badgeRowClass = 'sr-badges__row';
         const blockMainRow = 'sr_property_block_main_row';
         const $hotelItemBlock = $(`#hotel_${hotelId}`).parent();
         const $badgeRow = $hotelItemBlock.find(`.${badgeRowClass}`);
-        const toInsert = `
-        <div class="best-deal-container">
-          <div class="d-deal d-deal__cursor d-deal__lonely d-deal__main d-deal__tooltip d-deal__today_copy" data-component="track" data-track="click" data-hash="YPNBJOTXNAWXAQNSMTWGO" data-custom-goal="1">
-            <div class="d-deal-best">
-              <span class="d-deal--main  d-deal--main__text">
-                ${bestDeal}
-              </span>
-              <span class="d-deal--ext d-deal--smart d-deal--ext__last d-deal--ext__first ">
-                <svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/>
-                </svg>
-              </span>
-              </div>
-              <div class="d-deal-w">
-                <div class="d-deal-w--section d-deal-w--smart">
-                  <span class="d-deal-w--icon">
-                    <svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 0h24v24H0z" fill="none"/>
-                      <path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/>
-                    </svg>
-                  </span>
-                  <span>
-                    Great package here for you during your travel.
-                  </span>
-                </div>
-              </div>
-          </div>
-        </div>`;
 
         if ($badgeRow.length) {
-          $badgeRow.append(toInsert);
+          $badgeRow.append(renderInsertBadge(shortName));
         } else {
           console.log($hotelItemBlock.find(`.${blockMainRow}`));
           $hotelItemBlock.find(`.${blockMainRow}`).after(`<div class="sr-badges__row">${toInsert}</div>`);
