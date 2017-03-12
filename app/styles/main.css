@@ -157,6 +157,12 @@ body {
   margin-bottom: 0.75rem;
 }
 
+.more-deal-images.verified {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 26px;
+}
+
 .more-deal-title {
   margin-bottom: 0.75rem;
 }
@@ -169,7 +175,9 @@ body {
   cursor: pointer;
   font-size: 14px;
   float: right;
-  margin-top: 6px;
+  margin-top: 0px;
+  display: flex;
+  align-items: center;
 }
 
 .deal-wrapper {
@@ -223,6 +231,8 @@ body {
 
 .d-deal-best .d-deal--ext {
   background: #FF4165;
+  display: flex;
+  align-items: center;
 }
 
 .d-deal-best > .d-deal--main {
@@ -231,4 +241,21 @@ body {
   font-size: 15px;
   font-weight: 400;
   line-height: 23px;
+}
+
+.d-deal-best:hover {
+  cursor: pointer;
+  background: #aaa;
+}
+
+.number-packages-selected {
+  font-size: 15px;
+  text-align: right;
+  position: absolute;
+  right: 0;
+  margin-top: 5px;
+}
+
+.number-packages-selected em {
+  font-weight: 700;
 }

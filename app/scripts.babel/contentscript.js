@@ -3,18 +3,24 @@
 jQuery.noConflict();
 
 (function($) {
+  const COLOR_BLUE = 'blue';
+  const COLOR_PINK = 'pink';
+  const COLOR_WHITE = 'white';
+
   const ROOT_API_URL = 'http://bytheway-rails.herokuapp.com/hotel_packages';
-  const renderPowerPackLogo = (color) => {
-    colors = {
-      blue: '',
-      pink: '',
-      white: '#ffff'
+  const renderPowerPackLogo = (color = COLOR_BLUE, size = 24) => {
+    const colors = {
+      [COLOR_BLUE]: '#022b80',
+      [COLOR_PINK]: '#ff4165',
+      [COLOR_WHITE]: '#ffffff'
     }
+
     return `
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="#FF4165" d="M5.51386667,20.2195902 C5.50616707,20.1519311 5.5,20.0842721 5.5,20.0166131 L5.5,12.9115756 C5.5,12.8439165 5.50616707,12.7762575 5.51386667,12.7085985 L5.51386667,9.86548767 L10.18,9.86548767 C11.7954667,9.86548767 13.1058667,8.44748124 13.1058667,6.69935691 L13.1058667,1.5 L13.6258667,1.5 C16.4408,2.34780279 18.5,5.13879957 18.5,8.4624866 C18.5,12.4464094 15.5117333,15.6800643 11.8301333,15.6800643 L10.076,15.6800643 L10.076,20.0241158 C10.076,20.2491961 10.0413333,20.4592712 9.9928,20.6693462 C9.77093333,21.5771704 9.0776,22.2749196 8.2248,22.4549839 C8.0792,22.4849946 7.9336,22.5 7.788,22.5 C7.63546667,22.5 7.48986667,22.4849946 7.3512,22.4549839 C6.38053333,22.2524116 5.6248,21.3821008 5.51386667,20.3017149 L5.51386667,20.2195902 Z M8.7136,7.17619388 C7.50741011,7.17619388 6.5296,6.13115173 6.5296,4.84202691 C6.5296,3.5529021 7.50741011,2.50785995 8.7136,2.50785995 C9.91978989,2.50785995 10.8976,3.5529021 10.8976,4.84202691 C10.8976,6.13115173 9.91978989,7.17619388 8.7136,7.17619388 Z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24">
+        <path fill="${colors[color]}" d="M5.51386667,20.2195902 C5.50616707,20.1519311 5.5,20.0842721 5.5,20.0166131 L5.5,12.9115756 C5.5,12.8439165 5.50616707,12.7762575 5.51386667,12.7085985 L5.51386667,9.86548767 L10.18,9.86548767 C11.7954667,9.86548767 13.1058667,8.44748124 13.1058667,6.69935691 L13.1058667,1.5 L13.6258667,1.5 C16.4408,2.34780279 18.5,5.13879957 18.5,8.4624866 C18.5,12.4464094 15.5117333,15.6800643 11.8301333,15.6800643 L10.076,15.6800643 L10.076,20.0241158 C10.076,20.2491961 10.0413333,20.4592712 9.9928,20.6693462 C9.77093333,21.5771704 9.0776,22.2749196 8.2248,22.4549839 C8.0792,22.4849946 7.9336,22.5 7.788,22.5 C7.63546667,22.5 7.48986667,22.4849946 7.3512,22.4549839 C6.38053333,22.2524116 5.6248,21.3821008 5.51386667,20.3017149 L5.51386667,20.2195902 Z M8.7136,7.17619388 C7.50741011,7.17619388 6.5296,6.13115173 6.5296,4.84202691 C6.5296,3.5529021 7.50741011,2.50785995 8.7136,2.50785995 C9.91978989,2.50785995 10.8976,3.5529021 10.8976,4.84202691 C10.8976,6.13115173 9.91978989,7.17619388 8.7136,7.17619388 Z"/>
       </svg>`;
   }
+
   const renderFakeCard = (index) => {
     return `
       <div class="packageCaptionCard" data-deal-card-item="${index}">
@@ -138,19 +144,13 @@ jQuery.noConflict();
             ${shortName}
           </span>
           <span class="d-deal--ext d-deal--smart d-deal--ext__last d-deal--ext__first ">
-            <svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/>
-            </svg>
+            ${renderPowerPackLogo(COLOR_WHITE, 18)}
           </span>
           </div>
           <div class="d-deal-w">
             <div class="d-deal-w--section d-deal-w--smart">
               <span class="d-deal-w--icon">
-                <svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/>
-                </svg>
+                ${renderPowerPackLogo(COLOR_PINK, 25)}
               </span>
               <span>
                 Great package here for you during your travel.
@@ -206,13 +206,17 @@ jQuery.noConflict();
     const hotelId = $('*[data-hotel-id]').data('hotel-id');
     const cardArray = [];
     const reviewListOverlayClass = 'review_list_block-sliding_in_wrapper'
+    $('#booking-summary').prepend(`
+        <span class="package-selected"></span>
+    `);
 
     // Init Side Bar Fade-in modal, steal from review
     $(`.${reviewListOverlayClass}`).html(`
+      <img class="more-deal-images verified" src="${chrome.extension.getURL('images/verified-account.jpg')}" />
       <h1 class="more-deal-title">
         All Packages in ${ $('#hp_hotel_name').text() }
         <a class="be-merchant">
-          ${renderPowerPackLogo()}
+          ${renderPowerPackLogo(COLOR_BLUE, 18)}
           Become Our Merchant
         </a>
       </h1>
@@ -241,7 +245,10 @@ jQuery.noConflict();
        * Prepend Pre-selected packages
        */
       $availabilityElem.prepend(`
-        <h2 class="bolder-headers package">Our Special Packages: ${renderToggleFullDealButton('package-showall', 'Click here to show all packages')}</h2>
+        <h2 class="bolder-headers package">
+          Our Special Packages: ${renderToggleFullDealButton('package-showall', 'Click here to show all packages')}
+          <span class="number-packages-selected"></span>
+        </h2>
         <div class="card-in-row">
           ${cardArray.join('')}
           <div class="more-package">
@@ -259,22 +266,41 @@ jQuery.noConflict();
           const thumbnail = $(this).data('thumbnail');
           const name = $(this).data('name');
 
-          $('.packageCaptionCard').removeClass(classActive);
           $('.deal-wrapper').remove();
 
-          if (shouldToggleOn) {
-            $(this).addClass(classActive);
+          // Toggle itself
+          $(this).hasClass(classActive) ? $(this).removeClass(classActive) : $(this).addClass(classActive) ;
 
-            // Init Custom Deal highetWrapper
-            $('.property_hightlights_wrapper').append(
-              renderHighlightWrapper({
-                description,
-                thumbnail,
-                name,
-              })
-            );
-          }
+          // Adding up selection number
+          const numSeleciton = $('.packageCaptionCard.active').length
+
+          $('.number-packages-selected').html(`
+            ${renderPowerPackLogo(COLOR_BLUE, 14)}:
+            <em>${numSeleciton}</em> Packages Selected
+          `);
+
+          // if (shouldToggleOn) {
+
+          //   $(this).addClass(classActive);
+
+          //   // Init Custom Deal highetWrapper
+          //   $('.property_hightlights_wrapper').append(
+          //     renderHighlightWrapper({
+          //       description,
+          //       thumbnail,
+          //       name,
+          //     })
+          //   );
+          // }
         });
+
+        // Bind Price Hacking
+        $('.roomDefaultUse select').on('change', function () {
+          setTimeout(() => {
+            const numSeleciton = $('.packageCaptionCard.active').length
+            $('#booking-summary .package-selected').html(`${numSeleciton} package Selected <br />+ <br />`);
+          }, 1000)
+        })
       });
     })
   }
