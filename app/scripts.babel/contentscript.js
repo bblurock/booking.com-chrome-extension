@@ -4,6 +4,17 @@ jQuery.noConflict();
 
 (function($) {
   const ROOT_API_URL = 'http://bytheway-rails.herokuapp.com/hotel_packages';
+  const renderPowerPackLogo = (color) => {
+    colors = {
+      blue: '',
+      pink: '',
+      white: '#ffff'
+    }
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="#FF4165" d="M5.51386667,20.2195902 C5.50616707,20.1519311 5.5,20.0842721 5.5,20.0166131 L5.5,12.9115756 C5.5,12.8439165 5.50616707,12.7762575 5.51386667,12.7085985 L5.51386667,9.86548767 L10.18,9.86548767 C11.7954667,9.86548767 13.1058667,8.44748124 13.1058667,6.69935691 L13.1058667,1.5 L13.6258667,1.5 C16.4408,2.34780279 18.5,5.13879957 18.5,8.4624866 C18.5,12.4464094 15.5117333,15.6800643 11.8301333,15.6800643 L10.076,15.6800643 L10.076,20.0241158 C10.076,20.2491961 10.0413333,20.4592712 9.9928,20.6693462 C9.77093333,21.5771704 9.0776,22.2749196 8.2248,22.4549839 C8.0792,22.4849946 7.9336,22.5 7.788,22.5 C7.63546667,22.5 7.48986667,22.4849946 7.3512,22.4549839 C6.38053333,22.2524116 5.6248,21.3821008 5.51386667,20.3017149 L5.51386667,20.2195902 Z M8.7136,7.17619388 C7.50741011,7.17619388 6.5296,6.13115173 6.5296,4.84202691 C6.5296,3.5529021 7.50741011,2.50785995 8.7136,2.50785995 C9.91978989,2.50785995 10.8976,3.5529021 10.8976,4.84202691 C10.8976,6.13115173 9.91978989,7.17619388 8.7136,7.17619388 Z"/>
+      </svg>`;
+  }
   const renderFakeCard = (index) => {
     return `
       <div class="packageCaptionCard" data-deal-card-item="${index}">
@@ -200,7 +211,10 @@ jQuery.noConflict();
     $(`.${reviewListOverlayClass}`).html(`
       <h1 class="more-deal-title">
         All Packages in ${ $('#hp_hotel_name').text() }
-        <a class="be-merchant">Become Our Merchant</a>
+        <a class="be-merchant">
+          ${renderPowerPackLogo()}
+          Become Our Merchant
+        </a>
       </h1>
       <img class="more-deal-images" src="${chrome.extension.getURL('images/our-suggestion.jpg')}" />
       <img class="more-deal-images" src="${chrome.extension.getURL('images/filter-deals.jpg')}" />
@@ -208,7 +222,7 @@ jQuery.noConflict();
     `);
 
     // Hack the title - Add powerpack Badge
-    $('#wrap-hotelpage-top').before(renderInsertBadge('PowerPack Available!'));
+    $('.nowrap.hp__hotel_ratings').append(renderInsertBadge('PowerPack Available!'));
 
     /**
      * Fetching Best Deal Service
@@ -257,7 +271,8 @@ jQuery.noConflict();
                 description,
                 thumbnail,
                 name,
-              }));
+              })
+            );
           }
         });
       });
